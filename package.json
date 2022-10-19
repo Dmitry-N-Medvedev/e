@@ -1,0 +1,23 @@
+{
+  "name": "@dmitry-n-medvedev/e",
+  "version": "0.0.0",
+  "description": "e(ditor)",
+  "type": "module",
+  "engines": {
+    "node": "19.0.0",
+    "pnpm": "7.13.5"
+  },
+  "volta": {
+    "node": "19.0.0"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dmitry-N-Medvedev/e.git"
+  },
+  "keywords": [],
+  "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
+  "license": "MIT"
+}
