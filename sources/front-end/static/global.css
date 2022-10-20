@@ -5,6 +5,7 @@
   --main-font-family: "Inter var experimental";
   --main-color: black;
   --main-background-color: hsl(0deg 0% 97%);
+  --main-grid-gap: min(0.25vh, 0.25vw);
 
   --editor-background-color: hsl(0, 0%, 100%);
 
@@ -43,7 +44,7 @@ body {
     '. main .'
     '. footer .'
   ;
-  gap: min(0.25vh, 0.25vw);
+  gap: var(--main-grid-gap);
 
   padding: 0.5vh 0;
 
@@ -76,6 +77,9 @@ main {
   height: 100%;
 
   background-color: var(--editor-background-color);
+
+  pointer-events: all;
+  user-select: auto;
 }
 
 footer {

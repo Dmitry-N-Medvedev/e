@@ -9,6 +9,9 @@
   import {
     TimeStore,
   } from '$lib/stores/time.store';
+  // import {
+  //   KeyboardStore,
+  // } from '$lib/stores/keyboard.store';
 
   /** @type {any} */
   let currentMode;

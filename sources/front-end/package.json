@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.3",
-    "inter-ui": "^3.19.3"
+    "inter-ui": "^3.19.3",
+    "xstate": "^4.33.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.25.0",
