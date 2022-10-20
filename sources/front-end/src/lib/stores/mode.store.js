@@ -22,7 +22,7 @@ const createModeStore = () => {
   return {
     subscribe,
     updateMode: (newMode) => update((currentState) => {
-      console.log(`updateMode: ${currentState} => ${newMode}`);
+      console.log(`ModeStore.updateMode: ${currentState} => ${newMode}`);
 
       if (Modes.has(newMode) === false) {
         throw new ReferenceError(`unknown mode: ${newMode}`);

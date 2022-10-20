@@ -14,7 +14,7 @@ export const TimeStore = readable(null, (set) => {
   const interval = setInterval(() => {
     const plainTime = Temporal.PlainTime.from((new Date()).toLocaleTimeString());
 
-    set(`${plainTime.hour}:${plainTime.minute}:${plainTime.second.toString().padStart(2, '0')}`);
+    set(`${plainTime.hour.toString().padStart(2, '0')}:${plainTime.minute.toString().padStart(2, '0')}:${plainTime.second.toString().padStart(2, '0')}`);
   }, 1000);
 
   return () => {
