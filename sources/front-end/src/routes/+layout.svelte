@@ -9,71 +9,32 @@
   import Header from '$lib/Header/index.svelte';
   import Footer from '$lib/Footer/index.svelte';
   import {
-    ModeStore,
-  } from '$lib/stores/mode.store';
-  import {
-    KeyboardService,
-  } from '$lib/fsm/keyboard/KeyboardService';
-	
-  const unsubscribeModeStore = ModeStore.subscribe((currentState) => {
-    console.log('ModeStore:', currentState);
-  });
+    KeyboardClass,
+  } from '$lib/fsm/keyboard/KeyboardClass';
 
-  // @ts-ignore
-  const handleKeyboardEvent = (keyboardEvent) => {
-    if (isBrowser === true) {
-      requestAnimationFrame(() => {
-        KeyboardService.send({
-          type: keyboardEvent.constructor.name,
-          payload: Object.freeze({
-            isTrusted: keyboardEvent.isTrusted,
-            altKey: keyboardEvent.altKey,
-            bubbles: keyboardEvent.bubbles,
-            charCode: keyboardEvent.charCode,
-            code: keyboardEvent.code,
-            ctrlKey: keyboardEvent.ctrlKey,
-            detail: keyboardEvent.detail,
-            key: keyboardEvent.key,
-            keyCode: keyboardEvent.keyCode,
-            metaKey: keyboardEvent.metaKey,
-            repeat: keyboardEvent.repeat,
-            shiftKey: keyboardEvent.shiftKey,
-            timeStamp: keyboardEvent.timeStamp,
-            type: keyboardEvent.type,
-            which: keyboardEvent.which,
-          }),
-        });
-      });
-    }
-  }
-
+  /**
+	 * @type {KeyboardClass | undefined}
+	 */
+  let keyboard;
   let keyboardStore;
 
   onMount(() => {
     if (isBrowser === true) {
-      KeyboardService.onChange((ctx, evt) => {
-        console.log('+layout.onChange:', ctx, evt);
-
-        ModeStore.updateMode(ctx.mode);
-      });
-
-      KeyboardService.start();
-
-      // ModeStore.updateMode('normal');
+      keyboard = new KeyboardClass();
+      keyboard?.start();
     }
   });
 
   onDestroy(() => {
     if (isBrowser === true) {
-      KeyboardService.stop();
+      keyboard?.stop();
+      keyboard = undefined;
     }
-
-    unsubscribeModeStore();
   });
 </script>
 
 <svelte:window
-  on:keyup|capture|nonpassive|trusted|stopPropagation={handleKeyboardEvent}
+  on:keyup|capture|nonpassive|trusted|stopPropagation={keyboard?.handleKeyboardEvent}
 />
 <Header />
 <main>

@@ -9,9 +9,6 @@
   import {
     TimeStore,
   } from '$lib/stores/time.store';
-  // import {
-  //   KeyboardStore,
-  // } from '$lib/stores/keyboard.store';
 
   /** @type {any} */
   let currentMode;
@@ -28,15 +25,11 @@
     }
   });
 
-  onMount(() => {
-    console.log('mounted Footer');
-  });
+  onMount(() => {});
 
   onDestroy(() => {
     unsubscribeModeStore();
     unsubscribeTimeStore();
-
-    console.log('unmounted Footer');
   });
 </script>
 
