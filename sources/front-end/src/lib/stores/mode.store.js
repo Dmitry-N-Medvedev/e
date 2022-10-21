@@ -1,34 +1,29 @@
 import {
   writable,
 } from 'svelte/store';
+import {
+  KeyboardModes,
+} from '$lib/fsm/keyboard/KeyboardModes';
 
-const Modes = Object.freeze(new Map([
-  ['normal', {
-    title: 'normal',
-  }],
-  ['edit', {
-    title: 'edit',
-  }],
-]));
-
-let currentMode = undefined;
-
+const MODES = [];
 const createModeStore = () => {
+  for (const keyboardMode of Object.values(KeyboardModes)) {
+    MODES.push(keyboardMode);
+  }
+
   const {
     subscribe,
     update,
-  } = writable(currentMode);
+  } = writable(undefined);
 
   return {
     subscribe,
     updateMode: (newMode) => update((currentState) => {
-      console.log(`ModeStore.updateMode: ${currentState} => ${newMode}`);
-
-      if (Modes.has(newMode) === false) {
+      if (MODES.includes(newMode) === false) {
         throw new ReferenceError(`unknown mode: ${newMode}`);
       }
 
-      return newMode;
+      return (newMode !== currentState) ? newMode : currentState;
     }),
   }
 }
